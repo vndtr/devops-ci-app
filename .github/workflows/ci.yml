@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+      packages: write
 
 env:
   IMAGE_NAME: ghcr.io/${{ github.repository }}
@@ -64,9 +65,10 @@ jobs:
   image:
     needs: test
     runs-on: ubuntu-latest
-    # ИНЦИДЕНТ 1: для push в GHCR права пока недостаточно.
+    
     permissions:
       contents: read
+      packages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v7

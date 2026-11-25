@@ -139,12 +139,15 @@ jobs:
       VM_HOST: 192.168.56.101
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          persist-credentials: false
+        run: |
+          rm -rf repo && mkdir repo && cd repo
+          git init -q
+          git remote add origin "https://github.com/vndtr/devops-ci-app.git"
+          git fetch --depth 1 origin "${GITHUB_SHA}"
+          git checkout -q FETCH_HEAD
 
       - name: Deploy with Ansible
-        working-directory: ansible
+        working-directory: repo/ansible
         run: ansible-playbook site.yml -e "app_tag=${GITHUB_SHA}"
 
       - name: Check through Nginx

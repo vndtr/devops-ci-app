@@ -8,3 +8,4 @@ CI: Pylint → pytest → Docker build → smoke-test → GHCR.
 - health endpoint: `/health`;
 - образ: `ghcr.io/vndtr/devops-ci-app`;
 - основной workflow: `.github/workflows/ci.yml`.
+
